@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Countdown to 20/12/2024</title>
+    <style>
+      /* Căn chỉnh toàn bộ body */
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to bottom, #ff99cc, #ff66b2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Container chứa countdown */
+      #countdown {
+        font-size: 40px;
+        font-weight: bold;
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 20px 40px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        width: 400px;
+        animation: fadeIn 1s ease-out;
+      }
+
+      /* Hiệu ứng fade-in khi trang tải */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* Mỗi phần ngày, giờ, phút, giây */
+      .count-item {
+        display: inline-block;
+        background-color: #ff66b2;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 8px;
+        width: 80px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .count-item:hover {
+        transform: scale(1.1);
+      }
+
+      /* Cải tiến chữ hiển thị cho các phần */
+      .label {
+        font-size: 18px;
+        margin-top: 5px;
+        color: #fff;
+      }
+
+      /* Khi countdown hoàn thành */
+      .completed {
+        font-size: 24px;
+        color: #ff66b2;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Countdown Display -->
+    <div id="countdown">
+      <div class="count-item" id="days">
+        <span class="value">0</span>
+        <div class="label">Days</div>
+      </div>
+      <div class="count-item" id="hours">
+        <span class="value">0</span>
+        <div class="label">Hours</div>
+      </div>
+      <div class="count-item" id="minutes">
+        <span class="value">0</span>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="count-item" id="seconds">
+        <span class="value">0</span>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+
+    <script>
+      // Set the date we're counting down to: 00:00 on December 20, 2024
+      var countDownDate = new Date("Dec 20, 2024 00:00:00").getTime();
+
+      // Update the countdown every 1 second
+      var x = setInterval(function () {
+        // Get the current time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the countdown date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes, and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the countdown element
+        document
+          .getElementById("days")
+          .getElementsByClassName("value")[0].innerHTML = days;
+        document
+          .getElementById("hours")
+          .getElementsByClassName("value")[0].innerHTML = hours;
+        document
+          .getElementById("minutes")
+          .getElementsByClassName("value")[0].innerHTML = minutes;
+        document
+          .getElementById("seconds")
+          .getElementsByClassName("value")[0].innerHTML = seconds;
+
+        // If the countdown is finished, show a message and redirect
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML =
+            "<div class='completed'>Time's up! Redirecting...</div>";
+
+          // Redirect to your desired URL (replace with your page URL)
+          setTimeout(function () {
+            window.location.href = "https://realthdat.github.io/happy-birthday"; // Chuyển hướng đến trang yêu cầu
+          }, 3000); // Chuyển hướng sau 3 giây
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
